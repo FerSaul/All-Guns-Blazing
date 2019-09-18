@@ -4,11 +4,17 @@ extends KinematicBody2D
 const UP = Vector2(0,-1)
 const GRAVITY = 20
 const SPEED = 200
-const JUMP_HIGH = -600
+
+#Cambio salto de 600 a 400
+const JUMP_HIGH = -500
+#añadir variable saltos
+var saltos = 2
+
 var motion = Vector2()
 var dir_bala = 1
 var life = 100
 var bullet = load("res://FireBall.tscn")
+
 
 
 func _process(delta):
@@ -36,10 +42,15 @@ func _process(delta):
 		_disparar(dir_bala)
 	
 	if is_on_floor():
+		saltos = 2
 		if Input.is_action_just_pressed("ui_up"):
 			motion.y = JUMP_HIGH
+			saltos = 1
 	else:
 		$Sprite.play("air")
+		if Input.is_action_just_pressed("ui_up") and saltos > 0:
+			motion.y = JUMP_HIGH +100
+			saltos = 0
 	motion = move_and_slide(motion, UP)	
 	#print(motion)
 	pass

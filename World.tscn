@@ -9,8 +9,8 @@
 [ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=11]
 [ext_resource path="res://KinematicBody2D2.gd" type="Script" id=12]
 [ext_resource path="res://jungleDirtTileSet.tres" type="TileSet" id=13]
 
@@ -31,17 +31,17 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
-"name": "air",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
 "name": "stand",
 "speed": 5.0
 }, {
 "frames": [  ],
 "loop": true,
 "name": "death",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "air",
 "speed": 5.0
 } ]
 
@@ -57,7 +57,6 @@ scale = Vector2( 2.46154, 2.63529 )
 frames = SubResource( 1 )
 
 [node name="Character" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="player" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
@@ -85,7 +84,6 @@ position = Vector2( 32.88, 0 )
 [node name="player2" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
 ]]
-editor/display_folded = true
 position = Vector2( 192, 128 )
 script = ExtResource( 12 )
 __meta__ = {
