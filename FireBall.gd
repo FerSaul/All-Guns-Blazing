@@ -1,18 +1,16 @@
 extends KinematicBody2D
 
-var dir = 0
+var dir_x = 0
+var dir_y = 0
 var speed = 500
 var damage = 10
 
 func _process(delta):
-	var move = move_and_collide(Vector2(dir*speed*delta,0))
-	if dir < 0:
+	var move = move_and_collide(Vector2(dir_x*speed*delta,dir_y*speed*delta))
+	if dir_x < 0:
 		$Sprite.flip_h = true
 		
 	if move != null:
-		#if move.collider.is_in_group("jugador"):
-		#	move.collider.queue_free()
-		
 		self.queue_free()
 	
 	if move:
