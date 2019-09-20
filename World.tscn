@@ -1,18 +1,19 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://fondo.png" type="Texture" id=2]
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=11]
 [ext_resource path="res://KinematicBody2D2.gd" type="Script" id=12]
 [ext_resource path="res://jungleDirtTileSet.tres" type="TileSet" id=13]
+[ext_resource path="res://Interfaz.tscn" type="PackedScene" id=14]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -24,25 +25,25 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+}, {
 "frames": [  ],
 "loop": true,
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "air",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "stand",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
-"name": "run",
-"speed": 10.0
+"name": "air",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -84,7 +85,6 @@ position = Vector2( 32, 0 )
 [node name="player2" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
 ]]
-editor/display_folded = true
 position = Vector2( 179.427, 130.395 )
 script = ExtResource( 12 )
 __meta__ = {
@@ -114,3 +114,14 @@ tile_data = PoolIntArray( 65535, 5, 0, 40, 3, 0, 131071, 5, 0, 65576, 3, 0, 1966
 [node name="Audio_effects" type="Node2D" parent="."]
 
 [node name="Arena_Sound" type="AudioStreamPlayer2D" parent="Audio_effects"]
+
+[node name="Interfaz" parent="." instance=ExtResource( 14 )]
+
+[node name="PosicionInicio" type="Position2D" parent="."]
+position = Vector2( 800, 146.827 )
+
+[node name="PosicionInicio2" type="Position2D" parent="."]
+position = Vector2( 179.427, 130.395 )
+[connection signal="game_over" from="Character/player" to="." method="game_over"]
+[connection signal="game_over" from="Character/player2" to="." method="game_over"]
+[connection signal="iniciar_juego" from="Interfaz" to="." method="nuevo_juego"]

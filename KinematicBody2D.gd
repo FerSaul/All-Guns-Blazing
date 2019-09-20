@@ -9,6 +9,8 @@ const SPEED = 200
 const JUMP_HIGH = -500
 #añadir variable saltos
 var saltos = 2
+var activo = 0
+signal game_over
 
 var motion = Vector2()
 var dir_bala_x = 1
@@ -17,18 +19,27 @@ var life = 100
 var bullet = load("res://ElectroBall.tscn")
 var estado = 0
 
-
+func _ready():
+	hide()
+	activo = 1
+	
+	
+func inicio(pos):
+	position = pos
+	show()
+	activo = 1
 
 func _process(delta):
-	motion.y += GRAVITY
-	_agacharse()
-	_moverse(estado)
-	_disparo_agachado(estado)
-	_death()
-	#actualiza las posiciones
-	motion = move_and_slide(motion, UP)	
+	if activo == 1:
+		motion.y += GRAVITY
+		_agacharse()
+		_moverse(estado)
+		_disparo_agachado(estado)
+		_death()
+		#actualiza las posiciones
+		motion = move_and_slide(motion, UP)	
 	#print(motion)
-	pass
+
 	
 func _disparar(dir_x,dir_y):
 	var newBullet = bullet.instance()
@@ -39,6 +50,7 @@ func _disparar(dir_x,dir_y):
 	
 	
 func _moverse(estado):
+
 	#movimiento izquierda y derecha
 	if Input.is_action_pressed("ui_right") and estado == 0:
 		motion.x = SPEED
@@ -119,4 +131,9 @@ func _damage(dm):
 	
 func _death():
 	if life <= 0 :
-		self.queue_free()
+		activo = 0
+		hide()
+		emit_signal("game_over")
+
+		#self.queue_free()
+		
