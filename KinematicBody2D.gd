@@ -14,7 +14,7 @@ var motion = Vector2()
 var dir_bala_x = 1
 var dir_bala_y = 0
 var life = 100
-var bullet = load("res://FireBall.tscn")
+var bullet = load("res://ElectroBall.tscn")
 var estado = 0
 
 
@@ -36,6 +36,7 @@ func _disparar(dir_x,dir_y):
 	newBullet.global_position = $pos_bala.global_position
 	newBullet.dir_x = dir_x
 	newBullet.dir_y = dir_y
+	
 	
 func _moverse(estado):
 	#movimiento izquierda y derecha

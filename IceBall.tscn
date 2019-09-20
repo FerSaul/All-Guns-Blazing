@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://IceBallScript.gd" type="Script" id=1]
+[ext_resource path="res://Bullet-PNG-Pic.png" type="Texture" id=2]
+[ext_resource path="res://f89f0040b0663771cd5a907372b89439.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.0
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 98.64
+flag_disable_z = true
+spread = 14.69
+flatness = 1.0
+gravity = Vector3( -180, 80, 0 )
+angular_velocity = 274.28
+angular_velocity_random = 0.07
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
+[node name="Iceball" type="KinematicBody2D" groups=[
+"default_bullet",
+]]
+position = Vector2( 0.244175, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.235294, 0.698039, 0.878431, 1 )
+scale = Vector2( 0.096, 0.137931 )
+texture = ExtResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="Sprite"]
+show_behind_parent = true
+scale = Vector2( 0.35, 0.35 )
+amount = 15
+lifetime = 5.0
+speed_scale = 3.0
+randomness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 3 )
