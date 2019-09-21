@@ -1,12 +1,13 @@
 extends KinematicBody2D
-
+var set1 = ["ui_right","ui_left","disparar","ui_up","agacharse1"]
+var set2 = ["derecha","izquierda","disparar2","saltar","agacharse2"]
 
 const UP = Vector2(0,-1)
 const GRAVITY = 20
-const SPEED = 200
+var SPEED = 200
 
 #Cambio salto de 600 a 400
-const JUMP_HIGH = -500
+var JUMP_HIGH = -500
 #añadir variable saltos
 var saltos = 2
 var activo = 0
@@ -16,7 +17,8 @@ var motion = Vector2()
 var dir_bala_x = 1
 var dir_bala_y = 0
 var life = 100
-var bullet = load("res://ElectroBall.tscn")
+var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn"]
+var bullet = load(balls[0])
 var estado = 0
 
 func _ready():
@@ -136,4 +138,15 @@ func _death():
 		emit_signal("game_over")
 
 		#self.queue_free()
-		
+func _frost():
+	self.SPEED = 50
+	
+func _burn():
+	life -= 30
+	
+func _electroShock():
+	JUMP_HIGH = 0
+	
+func _weapon(n):
+	bullet = load(balls[n])
+     
