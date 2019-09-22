@@ -1,21 +1,19 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://fondo.png" type="Texture" id=2]
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=11]
 [ext_resource path="res://KinematicBody2D2.gd" type="Script" id=12]
 [ext_resource path="res://jungleDirtTileSet.tres" type="TileSet" id=13]
 [ext_resource path="res://Interfaz.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Caja.gd" type="Script" id=15]
-[ext_resource path="res://icon.png" type="Texture" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -32,27 +30,24 @@ animations = [ {
 "name": "stand",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "air",
-"speed": 5.0
-}, {
 "frames": [  ],
 "loop": true,
 "name": "death",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "air",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14, 28 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 21.2056, 20.5888 )
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
@@ -63,7 +58,6 @@ scale = Vector2( 2.46154, 2.63529 )
 frames = SubResource( 1 )
 
 [node name="Character" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="player" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
@@ -134,22 +128,20 @@ position = Vector2( 179.427, 130.395 )
 
 [node name="Boxes" type="Node2D" parent="."]
 
-[node name="Caja" type="KinematicBody2D" parent="Boxes" groups=[
-"caja",
-]]
-position = Vector2( 559.081, 340.903 )
-script = ExtResource( 15 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Caja1" type="Position2D" parent="Boxes"]
+position = Vector2( 619.957, 351.617 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boxes/Caja"]
-shape = SubResource( 4 )
+[node name="Caja2" type="Position2D" parent="Boxes"]
+position = Vector2( 138.796, 385.226 )
 
-[node name="Sprite" type="Sprite" parent="Boxes/Caja"]
-position = Vector2( 0.386932, -0.773819 )
-scale = Vector2( 0.649381, 0.63729 )
-texture = ExtResource( 16 )
+[node name="Caja3" type="Position2D" parent="Boxes"]
+position = Vector2( 1135.48, 401.03 )
+
+[node name="Caja4" type="Position2D" parent="Boxes"]
+position = Vector2( 67.1451, 626.591 )
+
+[node name="Caja5" type="Position2D" parent="Boxes"]
+position = Vector2( 1231.86, 616.338 )
 [connection signal="game_over" from="Character/player" to="." method="game_over"]
 [connection signal="game_over" from="Character/player2" to="." method="game_over"]
 [connection signal="iniciar_juego" from="Interfaz" to="." method="nuevo_juego"]

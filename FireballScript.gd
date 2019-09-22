@@ -18,8 +18,8 @@ func _process(delta):
 	if move:
 		if move.collider.has_method("_damage"):
 			move.collider._damage(damage)
-		if move.collider.has_method("_burn"):
-			move.collider._burn()
+		#if move.collider.has_method("_burn"):
+		#	move.collider._burn()
 	
 	if global_position.x > 1280 || global_position.x < 0:
 		self.queue_free()
