@@ -143,6 +143,7 @@ func _death():
 func _frost():
 	self.SPEED = 50
 	$Timer.start()
+	$Sprite.self_modulate=Color(0,0,1)
 	
 func _burn():
 	life -= 30
@@ -152,10 +153,12 @@ func _burn():
 func _electroShock():
 	JUMP_HIGH = 0
 	$Timer.start()
+	$Sprite.self_modulate=Color(0,1,0)
 
 	
 func _defrost():
 	self.SPEED = 200
+	$Sprite.self_modulate=Color(1,1,1)
 
 	
 #func _deburn():
@@ -164,6 +167,7 @@ func _defrost():
 	
 func _deelectroShock():
 	self.JUMP_HIGH = -500
+	$Sprite.self_modulate=Color(1,1,1)
 
 
 	

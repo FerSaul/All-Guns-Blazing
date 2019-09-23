@@ -9,8 +9,8 @@
 [ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=11]
 [ext_resource path="res://KinematicBody2D2.gd" type="Script" id=12]
 [ext_resource path="res://jungleDirtTileSet.tres" type="TileSet" id=13]
 [ext_resource path="res://Interfaz.tscn" type="PackedScene" id=14]
@@ -30,19 +30,19 @@ animations = [ {
 "name": "run",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "stand",
-"speed": 5.0
-}, {
 "frames": [  ],
 "loop": true,
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "air",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "stand",
 "speed": 5.0
 } ]
 
@@ -62,7 +62,6 @@ frames = SubResource( 1 )
 [node name="player" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
 ]]
-modulate = Color( 0.882353, 0.0980392, 0.0980392, 1 )
 position = Vector2( 800, 146.827 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -95,7 +94,6 @@ __meta__ = {
 }
 
 [node name="Sprite" type="AnimatedSprite" parent="Character/player2"]
-modulate = Color( 0.2, 0.0352941, 0.658824, 1 )
 position = Vector2( 0.88, 0.4 )
 frames = SubResource( 2 )
 animation = "death"
