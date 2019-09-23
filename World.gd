@@ -11,6 +11,7 @@ signal limpiar
 
 
 func _ready():
+	randomize()
 	pass
 	#generarCajas()
 	
@@ -28,11 +29,21 @@ func nuevo_juego():
 	$Character/player.inicio($PosicionInicio.position)
 	$Character/player2.inicio($PosicionInicio2.position)
 	$BoxM1.inicio($Caja1.position)
+	$BoxM1.type=randi()%3
+	print($BoxM1.type)
 	$BoxM2.inicio($Caja2.position)
+	$BoxM2.type=randi()%3
+	print($BoxM2.type)
 	$BoxM3.inicio($Caja3.position)
+	$BoxM3.type=randi()%3
+	print($BoxM3.type)
 	$BoxM4.inicio($Caja4.position)
+	$BoxM4.type=randi()%3
+	print($BoxM4.type)
 	$BoxM5.inicio($Caja5.position)
-
+	$BoxM5.type=randi()%3
+	print($BoxM5.type)
+	
 	#if iniciado==0:
 	#	generarCajas()
 	#	iniciado =1
