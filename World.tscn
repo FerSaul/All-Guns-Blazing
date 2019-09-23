@@ -1,19 +1,25 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://fondo.png" type="Texture" id=2]
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Player/Idle0.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Player/Run0.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Player/Run1.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Player/Run2.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Player/Run4.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Player/Run3.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Player/Run7.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Player/Jump1.png" type="Texture" id=11]
 [ext_resource path="res://KinematicBody2D2.gd" type="Script" id=12]
 [ext_resource path="res://jungleDirtTileSet.tres" type="TileSet" id=13]
 [ext_resource path="res://Interfaz.tscn" type="PackedScene" id=14]
+[ext_resource path="res://BoxM1.gd" type="Script" id=15]
+[ext_resource path="res://icon.png" type="Texture" id=16]
+[ext_resource path="res://BoxM2.gd" type="Script" id=17]
+[ext_resource path="res://BoxM3.gd" type="Script" id=18]
+[ext_resource path="res://BoxM4.gd" type="Script" id=19]
+[ext_resource path="res://BoxM5.gd" type="Script" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,7 +31,12 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "stand",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "run",
 "speed": 10.0
@@ -35,19 +46,24 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "air",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
-"name": "stand",
+"name": "air",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14, 28 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+[sub_resource type="RectangleShape2D" id=5]
+
+[sub_resource type="RectangleShape2D" id=6]
+
+[sub_resource type="RectangleShape2D" id=7]
+
+[sub_resource type="RectangleShape2D" id=8]
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
@@ -87,6 +103,7 @@ wait_time = 3.0
 [node name="player2" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
 ]]
+editor/display_folded = true
 position = Vector2( 179.427, 130.395 )
 script = ExtResource( 12 )
 __meta__ = {
@@ -130,20 +147,79 @@ position = Vector2( 179.427, 130.395 )
 
 [node name="Boxes" type="Node2D" parent="."]
 
-[node name="Caja1" type="Position2D" parent="Boxes"]
+[node name="BoxM1" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 15 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM1"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="BoxM1"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="Caja1" type="Position2D" parent="."]
 position = Vector2( 619.957, 351.617 )
 
-[node name="Caja2" type="Position2D" parent="Boxes"]
+[node name="Caja2" type="Position2D" parent="."]
 position = Vector2( 138.796, 385.226 )
 
-[node name="Caja3" type="Position2D" parent="Boxes"]
+[node name="Caja3" type="Position2D" parent="."]
 position = Vector2( 1135.48, 401.03 )
 
-[node name="Caja4" type="Position2D" parent="Boxes"]
+[node name="Caja4" type="Position2D" parent="."]
 position = Vector2( 67.1451, 626.591 )
 
-[node name="Caja5" type="Position2D" parent="Boxes"]
+[node name="Caja5" type="Position2D" parent="."]
 position = Vector2( 1231.86, 616.338 )
+
+[node name="BoxM2" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 17 )
+
+[node name="Sprite" type="Sprite" parent="BoxM2"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM2"]
+visible = false
+shape = SubResource( 5 )
+
+[node name="BoxM3" type="KinematicBody2D" parent="."]
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="BoxM3"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM3"]
+shape = SubResource( 6 )
+
+[node name="BoxM4" type="KinematicBody2D" parent="."]
+script = ExtResource( 19 )
+
+[node name="Sprite" type="Sprite" parent="BoxM4"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM4"]
+shape = SubResource( 7 )
+
+[node name="BoxM5" type="KinematicBody2D" parent="."]
+script = ExtResource( 20 )
+
+[node name="Sprite" type="Sprite" parent="BoxM5"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM5"]
+shape = SubResource( 8 )
+[connection signal="limpiar" from="." to="BoxM2" method="_remover"]
+[connection signal="limpiar" from="." to="BoxM3" method="_remover"]
+[connection signal="limpiar" from="." to="BoxM1" method="_remover"]
+[connection signal="limpiar" from="." to="BoxM5" method="_remover"]
+[connection signal="limpiar" from="." to="BoxM4" method="_remover"]
 [connection signal="game_over" from="Character/player" to="." method="game_over"]
 [connection signal="timeout" from="Character/player/Timer" to="Character/player" method="_defrost"]
 [connection signal="timeout" from="Character/player/Timer" to="Character/player" method="_deelectroShock"]
