@@ -3,7 +3,7 @@ extends KinematicBody2D
 var dir_x = 0
 var dir_y = 0
 var speed = 500
-var damage = 10
+var damage = 15
 
 func _process(delta):
 	var move = move_and_collide(Vector2(dir_x*speed*delta,dir_y*speed*delta))

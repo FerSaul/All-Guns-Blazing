@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Interfaz.gd" type="Script" id=1]
 [ext_resource path="res://Imperfecta Regular Rough.ttf" type="DynamicFontData" id=2]
@@ -13,6 +13,18 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 size = 50
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0627451, 0.282353, 0.654902, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.117647, 0.682353, 0.0901961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0.00392157, 0, 1 )
 
 [node name="Interfaz" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -41,4 +53,40 @@ margin_right = 121.0
 margin_bottom = 223.0
 custom_fonts/font = SubResource( 2 )
 text = "Jugar"
+
+[node name="Bar" type="HBoxContainer" parent="."]
+visible = false
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 311.0
+margin_bottom = 63.0
+
+[node name="ProgressBar" type="ProgressBar" parent="Bar"]
+margin_right = 250.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 250, 40 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+step = 1.0
+value = 70.0
+rounded = true
+
+[node name="Bar2" type="HBoxContainer" parent="."]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -268.063
+margin_top = 18.6396
+margin_right = 63.9375
+margin_bottom = 85.6396
+
+[node name="ProgressBar" type="ProgressBar" parent="Bar2"]
+margin_right = 250.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 250, 40 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+step = 1.0
+value = 50.0
+rounded = true
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

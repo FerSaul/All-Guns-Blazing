@@ -3,20 +3,23 @@ extends KinematicBody2D
 
 const UP = Vector2(0,-1)
 const GRAVITY = 20
-const SPEED = 200
+var SPEED = 200
 
 #Cambio salto de 600 a 400
-const JUMP_HIGH = -500
+var JUMP_HIGH = -500
 #añadir variable saltos
 var saltos = 2
 var activo = 0
 signal game_over
 
+signal statush
+
 var motion = Vector2()
 var dir_bala_x = 1
 var dir_bala_y = 0
 var life = 100
-var bullet = load("res://ElectroBall.tscn")
+var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn"]
+var bullet = load(balls[2])
 var estado = 0
 
 func _ready():
@@ -52,14 +55,14 @@ func _disparar(dir_x,dir_y):
 func _moverse(estado):
 
 	#movimiento izquierda y derecha
-	if Input.is_action_pressed("ui_right") and estado == 0:
+	if Input.is_action_pressed("derecha") and estado == 0:
 		motion.x = SPEED
 		dir_bala_x = 1
 		$pos_bala.global_position.x = self.global_position.x + 32
 		$pos_bala.global_position.y = self.global_position.y
 		$Sprite.flip_h = false
 		$Sprite.play("run")
-	elif Input.is_action_pressed("ui_left") and estado == 0:
+	elif Input.is_action_pressed("izquierda") and estado == 0:
 		motion.x = -SPEED
 		dir_bala_x = -1
 		$pos_bala.global_position.x = self.global_position.x - 32
@@ -76,49 +79,49 @@ func _moverse(estado):
 	# saltos
 	if is_on_floor():
 		saltos = 2
-		if Input.is_action_just_pressed("ui_up") and estado == 0:
+		if Input.is_action_just_pressed("saltar") and estado == 0:
 			motion.y = JUMP_HIGH
 			saltos = 1
 	else:
 		$Sprite.play("air")
-		if Input.is_action_just_pressed("ui_up") and saltos > 0 and estado == 0:
+		if Input.is_action_just_pressed("saltar") and saltos > 0 and estado == 0:
 			motion.y = JUMP_HIGH +100
 			saltos = 0
 	
 	
 func _agacharse():
 	if is_on_floor():
-		if Input.is_action_just_pressed("agacharse1") and estado == 0:
+		if Input.is_action_just_pressed("agacharse2") and estado == 0:
 			estado = 1
 			$CollisionShape2D.scale.y = 0.5
-		elif Input.is_action_just_pressed("agacharse1") and estado == 1:
+		elif Input.is_action_just_pressed("agacharse2") and estado == 1:
 			estado = 0
 			$CollisionShape2D.scale.y = 1
 			dir_bala_y = 0
 	
 func _disparo_agachado(estado):
 	if estado == 1:
-		if Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("derecha"):
 			dir_bala_x = 1
 			dir_bala_y = 0
 			$pos_bala.global_position.x = self.global_position.x + 32
 			$pos_bala.global_position.y = self.global_position.y
-		if Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("izquierda"):
 			dir_bala_x = -1
 			dir_bala_y = 0
 			$pos_bala.global_position.x = self.global_position.x - 32
 			$pos_bala.global_position.y = self.global_position.y
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_action_just_pressed("saltar"):
 			dir_bala_x = 0
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x
 			$pos_bala.global_position.y = self.global_position.y - 32
-		if Input.is_action_just_pressed("ui_up") and  Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("saltar") and  Input.is_action_just_pressed("ui_right"):
 			dir_bala_x = 1
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x + 32
 			$pos_bala.global_position.y = self.global_position.y - 32
-		if Input.is_action_just_pressed("ui_up") and Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("saltar") and Input.is_action_just_pressed("ui_left"):
 			dir_bala_x = -1
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x - 32
@@ -137,3 +140,33 @@ func _death():
 		
 		#self.queue_free()
 		
+func _frost():
+	self.SPEED = 50
+	$Timer.start()
+	
+func _burn():
+	life -= 30
+	#$Timer.start()
+	
+	
+func _electroShock():
+	JUMP_HIGH = 0
+	$Timer.start()
+
+	
+func _defrost():
+	self.SPEED = 200
+
+	
+#func _deburn():
+#	life -= 30
+
+	
+func _deelectroShock():
+	self.JUMP_HIGH = -500
+
+
+	
+func _weapon(n):
+	bullet = load(balls[n])
+     

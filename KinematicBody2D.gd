@@ -12,6 +12,8 @@ var JUMP_HIGH = -500
 var saltos = 2
 var activo = 0
 signal game_over
+#onready var timer = get_node("Timer")
+signal statush
 
 var motion = Vector2()
 var dir_bala_x = 1
@@ -140,12 +142,29 @@ func _death():
 		#self.queue_free()
 func _frost():
 	self.SPEED = 50
+	$Timer.start()
 	
 func _burn():
 	life -= 30
+	#$Timer.start()
 	
 func _electroShock():
 	JUMP_HIGH = 0
+	$Timer.start()
+
+	
+func _defrost():
+	self.SPEED = 200
+
+	
+#func _deburn():
+#	life -= 30
+
+	
+func _deelectroShock():
+	self.JUMP_HIGH = -500
+
+
 	
 func _weapon(n):
 	bullet = load(balls[n])
