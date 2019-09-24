@@ -12,6 +12,7 @@ func _process(delta):
 	if move:
 		if move.collider.has_method("_weapon"):
 			move.collider._weapon(type)
+			move.collider.boost()
 			_remover()
 			#self.queue_free()
 	

@@ -100,10 +100,14 @@ position = Vector2( 32, 0 )
 [node name="Timer" type="Timer" parent="Character/player"]
 wait_time = 3.0
 
+[node name="Recharge" type="Timer" parent="Character/player"]
+
+[node name="Boost" type="Timer" parent="Character/player"]
+wait_time = 8.0
+
 [node name="player2" type="KinematicBody2D" parent="Character" groups=[
 "jugador",
 ]]
-editor/display_folded = true
 position = Vector2( 179.427, 130.395 )
 script = ExtResource( 12 )
 __meta__ = {
@@ -126,6 +130,11 @@ position = Vector2( 32, 0 )
 [node name="Timer" type="Timer" parent="Character/player2"]
 wait_time = 3.0
 
+[node name="Recharge" type="Timer" parent="Character/player2"]
+
+[node name="BoostTimer" type="Timer" parent="Character/player2"]
+wait_time = 8.0
+
 [node name="Arena" type="TileMap" parent="."]
 tile_set = ExtResource( 13 )
 cell_size = Vector2( 32, 32 )
@@ -138,12 +147,6 @@ editor/display_folded = true
 [node name="Arena_Sound" type="AudioStreamPlayer2D" parent="Audio_effects"]
 
 [node name="Interfaz" parent="." instance=ExtResource( 14 )]
-
-[node name="PosicionInicio" type="Position2D" parent="."]
-position = Vector2( 800, 146.827 )
-
-[node name="PosicionInicio2" type="Position2D" parent="."]
-position = Vector2( 179.427, 130.395 )
 
 [node name="Boxes" type="Node2D" parent="."]
 
@@ -158,6 +161,51 @@ shape = SubResource( 4 )
 [node name="Sprite" type="Sprite" parent="BoxM1"]
 scale = Vector2( 0.663, 0.663 )
 texture = ExtResource( 16 )
+
+[node name="BoxM2" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 17 )
+
+[node name="Sprite" type="Sprite" parent="BoxM2"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM2"]
+visible = false
+shape = SubResource( 5 )
+
+[node name="BoxM3" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 18 )
+
+[node name="Sprite" type="Sprite" parent="BoxM3"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM3"]
+shape = SubResource( 6 )
+
+[node name="BoxM4" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 19 )
+
+[node name="Sprite" type="Sprite" parent="BoxM4"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM4"]
+shape = SubResource( 7 )
+
+[node name="BoxM5" type="KinematicBody2D" parent="."]
+editor/display_folded = true
+script = ExtResource( 20 )
+
+[node name="Sprite" type="Sprite" parent="BoxM5"]
+scale = Vector2( 0.663, 0.663 )
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM5"]
+shape = SubResource( 8 )
 
 [node name="Caja1" type="Position2D" parent="."]
 position = Vector2( 619.957, 351.617 )
@@ -174,47 +222,11 @@ position = Vector2( 67.1451, 626.591 )
 [node name="Caja5" type="Position2D" parent="."]
 position = Vector2( 1231.86, 616.338 )
 
-[node name="BoxM2" type="KinematicBody2D" parent="."]
-editor/display_folded = true
-script = ExtResource( 17 )
+[node name="PosicionInicio" type="Position2D" parent="."]
+position = Vector2( 800, 146.827 )
 
-[node name="Sprite" type="Sprite" parent="BoxM2"]
-scale = Vector2( 0.663, 0.663 )
-texture = ExtResource( 16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM2"]
-visible = false
-shape = SubResource( 5 )
-
-[node name="BoxM3" type="KinematicBody2D" parent="."]
-script = ExtResource( 18 )
-
-[node name="Sprite" type="Sprite" parent="BoxM3"]
-scale = Vector2( 0.663, 0.663 )
-texture = ExtResource( 16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM3"]
-shape = SubResource( 6 )
-
-[node name="BoxM4" type="KinematicBody2D" parent="."]
-script = ExtResource( 19 )
-
-[node name="Sprite" type="Sprite" parent="BoxM4"]
-scale = Vector2( 0.663, 0.663 )
-texture = ExtResource( 16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM4"]
-shape = SubResource( 7 )
-
-[node name="BoxM5" type="KinematicBody2D" parent="."]
-script = ExtResource( 20 )
-
-[node name="Sprite" type="Sprite" parent="BoxM5"]
-scale = Vector2( 0.663, 0.663 )
-texture = ExtResource( 16 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxM5"]
-shape = SubResource( 8 )
+[node name="PosicionInicio2" type="Position2D" parent="."]
+position = Vector2( 179.427, 130.395 )
 [connection signal="limpiar" from="." to="BoxM4" method="_remover"]
 [connection signal="limpiar" from="." to="BoxM3" method="_remover"]
 [connection signal="limpiar" from="." to="BoxM1" method="_remover"]
@@ -223,7 +235,9 @@ shape = SubResource( 8 )
 [connection signal="game_over" from="Character/player" to="." method="game_over"]
 [connection signal="timeout" from="Character/player/Timer" to="Character/player" method="_defrost"]
 [connection signal="timeout" from="Character/player/Timer" to="Character/player" method="_deelectroShock"]
+[connection signal="timeout" from="Character/player/Boost" to="Character/player" method="_deBoost"]
 [connection signal="game_over" from="Character/player2" to="." method="game_over"]
 [connection signal="timeout" from="Character/player2/Timer" to="Character/player2" method="_defrost"]
 [connection signal="timeout" from="Character/player2/Timer" to="Character/player2" method="_deelectroShock"]
+[connection signal="timeout" from="Character/player2/BoostTimer" to="Character/player2" method="_deboost"]
 [connection signal="iniciar_juego" from="Interfaz" to="." method="nuevo_juego"]

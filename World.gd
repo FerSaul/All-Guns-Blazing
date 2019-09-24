@@ -1,12 +1,8 @@
 extends Node
 
 var box = load("res://Caja.tscn")
-var newBox1
-var newBox2
-var newBox3
-var newBox4
-var newBox5
-var iniciado = 0
+
+#var iniciado = 0
 signal limpiar
 
 

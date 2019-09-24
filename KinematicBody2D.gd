@@ -19,8 +19,8 @@ var motion = Vector2()
 var dir_bala_x = 1
 var dir_bala_y = 0
 var life = 100
-var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn"]
-var bullet = load(balls[0])
+var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn","res://NormalBall.tscn"]
+var bullet = load(balls[3])
 var estado = 0
 
 func _ready():
@@ -95,9 +95,11 @@ func _agacharse():
 		if Input.is_action_just_pressed("agacharse1") and estado == 0:
 			estado = 1
 			$CollisionShape2D.scale.y = 0.5
+			$pos_bala.global_position.y = $pos_bala.global_position.y + 5
 		elif Input.is_action_just_pressed("agacharse1") and estado == 1:
 			estado = 0
 			$CollisionShape2D.scale.y = 1
+			$pos_bala.global_position.y = $pos_bala.global_position.y - 5
 			dir_bala_y = 0
 	
 func _disparo_agachado(estado):
@@ -163,6 +165,9 @@ func _defrost():
 	
 #func _deburn():
 #	life -= 30
+func boost():
+	$Boost.start()
+	
 
 	
 func _deelectroShock():
@@ -174,3 +179,7 @@ func _deelectroShock():
 func _weapon(n):
 	bullet = load(balls[n])
      
+
+func _deBoost():
+	bullet = load(balls[3])
+	pass # Replace with function body.

@@ -18,8 +18,8 @@ var motion = Vector2()
 var dir_bala_x = 1
 var dir_bala_y = 0
 var life = 100
-var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn"]
-var bullet = load(balls[2])
+var balls = ["res://FireBall.tscn","res://IceBall.tscn","res://ElectroBall.tscn","res://NormalBall.tscn"]
+var bullet = load(balls[3])
 var estado = 0
 
 func _ready():
@@ -74,7 +74,7 @@ func _moverse(estado):
 		$Sprite.play("stand")
 	
 	#accion de disparar
-	if Input.is_action_just_pressed("disparar"):
+	if Input.is_action_just_pressed("disparar2"):
 		_disparar(dir_bala_x,dir_bala_y)
 	# saltos
 	if is_on_floor():
@@ -94,9 +94,11 @@ func _agacharse():
 		if Input.is_action_just_pressed("agacharse2") and estado == 0:
 			estado = 1
 			$CollisionShape2D.scale.y = 0.5
+			$pos_bala.global_position.y = $pos_bala.global_position.y + 5
 		elif Input.is_action_just_pressed("agacharse2") and estado == 1:
 			estado = 0
 			$CollisionShape2D.scale.y = 1
+			$pos_bala.global_position.y = $pos_bala.global_position.y - 5
 			dir_bala_y = 0
 	
 func _disparo_agachado(estado):
@@ -116,12 +118,12 @@ func _disparo_agachado(estado):
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x
 			$pos_bala.global_position.y = self.global_position.y - 32
-		if Input.is_action_just_pressed("saltar") and  Input.is_action_just_pressed("ui_right"):
+		if Input.is_action_just_pressed("saltar") and  Input.is_action_just_pressed("derecha"):
 			dir_bala_x = 1
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x + 32
 			$pos_bala.global_position.y = self.global_position.y - 32
-		if Input.is_action_just_pressed("saltar") and Input.is_action_just_pressed("ui_left"):
+		if Input.is_action_just_pressed("saltar") and Input.is_action_just_pressed("izquierda"):
 			dir_bala_x = -1
 			dir_bala_y = -1
 			$pos_bala.global_position.x = self.global_position.x - 32
@@ -160,7 +162,8 @@ func _defrost():
 	self.SPEED = 200
 	$Sprite.self_modulate=Color(1,1,1)
 
-	
+func boost():
+	$BoostTimer.start()
 #func _deburn():
 #	life -= 30
 
@@ -174,3 +177,7 @@ func _deelectroShock():
 func _weapon(n):
 	bullet = load(balls[n])
      
+
+func _deboost():
+	bullet = load(balls[3])
+	pass # Replace with function body.
